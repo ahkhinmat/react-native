@@ -20,71 +20,50 @@
 //   },
 // });
 import React from "react";
-import { Button, Platform, Text, Vibration, View, SafeAreaView, StyleSheet } from "react-native";
-
-const Separator = () => {
-  return <View style={Platform.OS === "android" ? styles.separator : null} />;
-}
-
+import { Button, Platform, Text, Vibration, View, SafeAreaView, StyleSheet,StatusBar } from "react-native";
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 const App = () => {
-
-  const ONE_SECOND_IN_MS = 1000;
-
-  const PATTERN = [
-    1 * ONE_SECOND_IN_MS,
-    2 * ONE_SECOND_IN_MS,
-    3 * ONE_SECOND_IN_MS
-  ];
-
-  const PATTERN_DESC =
-    Platform.OS === "android"
-      ? "wait 1s, vibrate 2s, wait 3s"
-      : "wait 1s, vibrate, wait 2s, vibrate, wait 3s";
-
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
+
       <View>
-        <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
+        <StatusBar barStyle="ligh-content"/>
+          <View style={styles.headerContainer}>
+              <View style={styles.inputContainer}>
+                  <FontAwesome name="search" size={30}/>
+                <Text>Bạn tìm gì hôm nay?</Text>
+              </View>
+              <View style={styles.cartContainer}>
+                  <FontAwesome name="shopping-cart" size={24}/>
+              </View>
+
+          </View>
       </View>
-      <Separator />
-      {Platform.OS == "android"
-        ? [
-            <View>
-              <Button
-                title="Vibrate for 10 seconds"
-                onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
-              />
-            </View>,
-            <Separator />
-          ]
-        : null}
-      <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
-      <Button
-        title="Vibrate with pattern"
-        onPress={() => Vibration.vibrate(PATTERN)}
-      />
-      <Separator />
-      <Button
-        title="Vibrate with pattern until cancelled"
-        onPress={() => Vibration.vibrate(PATTERN, true)}
-      />
-      <Separator />
-      <Button
-        title="Stop vibration pattern"
-        onPress={() => Vibration.cancel()}
-        color="#FF0000"
-      />
-    </SafeAreaView>
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: 44,
-    padding: 8
+  headerContainer: {
+    flexDirection: 'row',
+    paddingTop:60,
+    backgroundColor:'aqua'
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    backgroundColor:'#fff',
+    marginLeft:10,
+    alignItems:'center',
+    marginBottom:4,
+    flex:1,
+    borderRadius:2,
+    paddingHorizontal:12,
+    paddingVertical:8,
+  },
+  cartContainer:{
+    flexDirection: 'row',
+    paddingHorizontal:20,
+    justifyContent:'center',
+    alignItems:'center'
   },
   header: {
     fontSize: 18,
